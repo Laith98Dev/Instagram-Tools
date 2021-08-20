@@ -4,9 +4,8 @@ try:
     import time
     import colorama
 
-from colorama import Fore, Style
 
-logo = (Fore.RED + """
+logo = (colorama.Fore.RED + """
 Created By
  _           _ _   _    ___   ___  _____             
 | |         (_) | | |  / _ \ / _ \|  __ \            
@@ -18,7 +17,7 @@ Created By
 print(logo)
 
 
-print(Fore.YELLOW+""" Hey, please login to continue """)
+print(colorama.Fore.YELLOW+""" Hey, please login to continue """)
 
 user = input('Username: ')
 
@@ -63,7 +62,7 @@ def login():
     print(loginreq.text)
     
     if loginreq.text.find("is_private") >= 0:
-        print(Fore.YELLOW+"Login Successfully")
+        print(colorama.Fore.YELLOW+"Login Successfully")
         
         r.headers.update({'X-CSRFToken': loginreq.cookies['csrftoken']})
         
@@ -73,5 +72,5 @@ def login():
         
         print(url_get_user_id)
     else:
-        print(Fore.RED+"Failed Login Check your data!!")
+        print(colorama.Fore.RED+"Failed Login Check your data!!")
         
