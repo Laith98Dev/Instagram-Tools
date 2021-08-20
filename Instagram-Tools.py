@@ -3,25 +3,22 @@ try:
     import uuid
     import time
     import colorama
-    from colorama import Fore, Style
 
-R = Fore.RED
-Y = Fore.YELLOW
-B = Fore.BLUE
+from colorama import Fore, Style
 
-logo = (R + """
+logo = (Fore.RED + """
 Created By
  _           _ _   _    ___   ___  _____             
 | |         (_) | | |  / _ \ / _ \|  __ \            
 | |     __ _ _| |_| |_| (_) | (_) | |  | | _____   __
 | |    / _` | | __| '_ \__, |> _ <| |  | |/ _ \ \ / /
 | |___| (_| | | |_| | | |/ /| (_) | |__| |  __/\ V / 
-|______\__,_|_|\__|_| |_/_/  \___/|_____/ \___| \_/   """);
+|______\__,_|_|\__|_| |_/_/  \___/|_____/ \___| \_/   """+Style.RESET_ALL);
      
 print(logo)
 
 
-print(Y+""" Hey, please login to continue """)
+print(Fore.YELLOW+""" Hey, please login to continue """)
 
 user = input('Username: ')
 
@@ -66,7 +63,7 @@ def login():
     print(loginreq.text)
     
     if loginreq.text.find("is_private") >= 0:
-        print(Y+"Login Successfully")
+        print(Fore.YELLOW+"Login Successfully")
         
         r.headers.update({'X-CSRFToken': loginreq.cookies['csrftoken']})
         
@@ -76,5 +73,5 @@ def login():
         
         print(url_get_user_id)
     else:
-        print(R+"Failed Login Check your data!!")
+        print(Fore.RED+"Failed Login Check your data!!")
         
