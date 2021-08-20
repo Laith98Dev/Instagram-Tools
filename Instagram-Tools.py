@@ -20,11 +20,18 @@ Created By
 |______\__,_|_|\__|_| |_/_/  \___/|_____/ \___| \_/   """+Style.RESET_ALL);
      
 print(logo)
+print("   ")
 
 
 print(Fore.YELLOW+"""Hey, please enter repeat number to continue """)
 
-count = input('How many account: ')
+print("   ")
+try:
+    count = int(input("'How many account: "))
+    break
+except ValueError:
+    print("Error, it must be an integer")
+    
 
 def login(user, password, cc):    
     r = requests.Session()
@@ -69,13 +76,13 @@ def login(user, password, cc):
         print(Fore.RED+" " + user + ":" + password + " Failed Login! - " + cc)
         print(" ")
 
-def startCheck(c):
+def startCheck(c1):
     done = 0
-    while done <= c:
+    while done <= int(c1):
         done += 1
         userr = randomChar(4)
-        pass = randomChar(10)
-        login(userr, pass, done)
+        passr = randomChar(10)
+        login(userr, passr, done)
         time.sleep(0.1)
 
 def randomChar(c):
@@ -85,3 +92,6 @@ def randomChar(c):
         end += random.choice("abcdefghijkmnopqrstuvwxyz023456789_")
         now += 1
     return end.lower()
+
+
+startCheck(count)
