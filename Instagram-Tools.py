@@ -67,7 +67,7 @@ def login():
         
         r.headers.update({'X-CSRFToken': loginreq.cookies['csrftoken']})
         
-        url_id = "https://www.instagram.com/{}/?__a=1".format(target)
+        url_id = "https://www.instagram.com/{}/?__a=1".format(target_url)
         
         url_get_user_id = r.get(url_id).json()
         
