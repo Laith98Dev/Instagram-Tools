@@ -28,7 +28,6 @@ print(Fore.YELLOW+"""Hey, please enter repeat number to continue """)
 print("   ")
 try:
     count = int(input("'How many account: "))
-    break
 except ValueError:
     print("Error, it must be an integer")
     
@@ -94,4 +93,10 @@ def randomChar(c):
     return end.lower()
 
 
-startCheck(count)
+done = 0
+while done <= count:
+    done += 1
+    userr = randomChar(4)
+    passr = randomChar(10)
+    login(userr, passr, done)
+    time.sleep(0.1)
