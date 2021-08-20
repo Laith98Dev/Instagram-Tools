@@ -76,4 +76,5 @@ def login():
         print(url_get_user_id)
     else:
         print(Fore.RED+"Failed Login Check your data!!")
-        
+
+login()
