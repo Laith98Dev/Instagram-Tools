@@ -79,7 +79,7 @@ def login():
         
         your_user_id = str(user_id.split("_")[1])
         
-        urlRep = "https://i.instagram.com/users/" + your_user_id + "/stories/"
+        urlRep = "https://instagram.com/" + target + "/stories/"
         
         req_SessionID = r.get(urlRep)
         
