@@ -3,7 +3,8 @@ try:
     import uuid
     import time
     import colorama
-
+except Exception as e:
+    print(e)
 
 logo = (colorama.Fore.RED + """
 Created By
