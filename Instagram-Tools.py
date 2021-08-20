@@ -20,16 +20,16 @@ Created By
 print(logo)
 
 
-print(Fore.YELLOW+""" Hey, please login to continue """)
+print(Fore.YELLOW+"""Hey, please login to continue """)
 
 user = input('Username: ')
 
 password = input('Password: ')
 
-target_url = input('Story url: ') 
+target = input('Target Username: ') 
 
 def login():
-    global target_url
+    global target
     
     r = requests.Session()
     
@@ -69,11 +69,21 @@ def login():
         
         r.headers.update({'X-CSRFToken': loginreq.cookies['csrftoken']})
         
-        url_id = "https://www.instagram.com/{}/?__a=1".format(target_url)
+        url_id = "https://www.instagram.com/{}/?__a=1".format(target)
         
         url_get_user_id = r.get(url_id).json()
         
-        print(url_get_user_id)
+        # print(url_get_user_id)
+        
+        user_id = str(url_get_user_id["logging_page_id"])
+        
+        your_user_id = str(user_id.split("_")[1])
+        
+        urlRep = "https://i.instagram.com/users/" + your_user_id + "/stories/"
+        
+        req_SessionID = r.get(urlRep)
+        
+        print(req_SessionID)
     else:
         print(Fore.RED+"Failed Login Check your data!!")
 
