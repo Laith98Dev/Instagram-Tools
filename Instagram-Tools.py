@@ -6,7 +6,9 @@ try:
 except Exception as e:
     print(e)
 
-logo = (colorama.Fore.RED + """
+from colorama import Fore, Style
+
+logo = (Fore.RED + """
 Created By
  _           _ _   _    ___   ___  _____             
 | |         (_) | | |  / _ \ / _ \|  __ \            
@@ -18,7 +20,7 @@ Created By
 print(logo)
 
 
-print(colorama.Fore.YELLOW+""" Hey, please login to continue """)
+print(Fore.YELLOW+""" Hey, please login to continue """)
 
 user = input('Username: ')
 
@@ -63,7 +65,7 @@ def login():
     print(loginreq.text)
     
     if loginreq.text.find("is_private") >= 0:
-        print(colorama.Fore.YELLOW+"Login Successfully")
+        print(Fore.YELLOW+"Login Successfully")
         
         r.headers.update({'X-CSRFToken': loginreq.cookies['csrftoken']})
         
@@ -73,5 +75,5 @@ def login():
         
         print(url_get_user_id)
     else:
-        print(colorama.Fore.RED+"Failed Login Check your data!!")
+        print(Fore.RED+"Failed Login Check your data!!")
         
