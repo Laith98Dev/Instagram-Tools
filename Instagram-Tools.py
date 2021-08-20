@@ -65,26 +65,34 @@ def login():
     print(loginreq.text)
     
     if loginreq.text.find("is_private") >= 0:
+        print(" ")
         print(Fore.YELLOW+"Login Successfully")
-        
+        print(" ")
         r.headers.update({'X-CSRFToken': loginreq.cookies['csrftoken']})
         
         url_id = "https://www.instagram.com/{}/?__a=1".format(target)
         
         url_get_user_id = r.get(url_id).json()
         
-        # print(url_get_user_id)
-        
-        user_id = str(url_get_user_id["logging_page_id"])
-        
-        your_user_id = str(user_id.split("_")[1])
-        
-        urlRep = "https://instagram.com/" + target + "/stories/"
-        
-        req_SessionID = r.get(urlRep)
-        
-        print(req_SessionID)
+        print(loginreq.text.find("is_private"))
+        if loginreq.text.find("is_private") == 1:
+            print(Fore.RED+"Sorry account private so i cant get the stories :(")
+            print(" ")
+        else:
+            # print(url_get_user_id)
+            
+            user_id = str(url_get_user_id["logging_page_id"])
+            
+            your_user_id = str(user_id.split("_")[1])
+            
+            urlRep = "https://instagram.com/" + target + "/stories/"
+            
+            req_SessionID = r.get(urlRep)
+            
+            print(req_SessionID)
+            print(" ")
     else:
         print(Fore.RED+"Failed Login Check your data!!")
+        print(" ")
 
 login()
