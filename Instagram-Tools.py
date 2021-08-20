@@ -3,6 +3,8 @@ try:
     import uuid
     import time
     import colorama
+    import string
+    import random
 except Exception as e:
     print(e)
 
@@ -20,17 +22,11 @@ Created By
 print(logo)
 
 
-print(Fore.YELLOW+"""Hey, please login to continue """)
+print(Fore.YELLOW+"""Hey, please enter repeat number to continue """)
 
-user = input('Username: ')
+count = input('How many account: ')
 
-password = input('Password: ')
-
-target = input('Target Username: ') 
-
-def login():
-    global target
-    
+def login(user, password, cc):    
     r = requests.Session()
     
     uid = str(uuid.uuid4())
@@ -62,37 +58,30 @@ def login():
     
     loginreq = r.post(url, data = data, headers = headers, allow_redirects = True)
     
-    print(loginreq.text)
+    #print(loginreq.text)
     
     if loginreq.text.find("is_private") >= 0:
         print(" ")
-        print(Fore.YELLOW+"Login Successfully")
+        print(Fore.YELLOW+" " + user + ":" + password + " Login Successfully - " + cc)
         print(" ")
-        r.headers.update({'X-CSRFToken': loginreq.cookies['csrftoken']})
-        
-        url_id = "https://www.instagram.com/{}/?__a=1".format(target)
-        
-        url_get_user_id = r.get(url_id).json()
-        
-        print(loginreq.text.find("is_private"))
-        if loginreq.text.find("is_private") == 1:
-            print(Fore.RED+"Sorry account private so i cant get the stories :(")
-            print(" ")
-        else:
-            # print(url_get_user_id)
-            
-            user_id = str(url_get_user_id["logging_page_id"])
-            
-            your_user_id = str(user_id.split("_")[1])
-            
-            urlRep = "https://instagram.com/" + target + "/stories/"
-            
-            req_SessionID = r.get(urlRep)
-            
-            print(req_SessionID)
-            print(" ")
     else:
-        print(Fore.RED+"Failed Login Check your data!!")
+        print(" ")
+        print(Fore.RED+" " + user + ":" + password + " Failed Login! - " + cc)
         print(" ")
 
-login()
+def startCheck(c):
+    done = 0
+    while done <= c:
+        done += 1
+        userr = randomChar(4)
+        pass = randomChar(10)
+        login(userr, pass, done)
+        time.sleep(0.1)
+
+def randomChar(c):
+    end = ""
+    now = 0
+    while now < c:
+        end += random.choice("abcdefghijkmnopqrstuvwxyz023456789_")
+        now += 1
+    return end.lower()
